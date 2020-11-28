@@ -29,6 +29,23 @@ app.post("/contatos", (req, res) => {
     return res.json(contatos);
 })
 
+app.put("/contatos/:id", (req, res) => {
+    const { id } = req.params;
+    const { nome } = req.body;
+
+    contatos[id] = nome;
+
+    return res.json(contatos);
+});
+
+app.delete("/contatos/:id", (req, res) => {
+    const { id } = req.params;
+    
+    contatos.splice(id, 1);
+
+    return res.json(contatos)
+});
+
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080: http://localhost:8080/contatos");
 });
