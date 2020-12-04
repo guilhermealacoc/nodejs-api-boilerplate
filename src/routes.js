@@ -1,28 +1,21 @@
 import { Router } from 'express';
-
-// import mongoose from mongoose;
-
+import User from './app/models/User'
 const routes = new Router();
 
-// mongoose.connect('mongodb://localhost/teste', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false,
-//   useCreateIndex: true
-// }).then(()=>{
-//     console.log("Conexão feita com sucesso!!!");
-// }).catch((erro) => {
-//     ("Erro na conexão" + erro);
-// });
+routes.get('/', async (req, res) =>{
+    await User.create({
+        nome:'Gaabriela',
+        email: 'guilherme@teste.com',
+        senha: 'teste'
+    }, function(err, small){
+        if(err) return res.status(400).json({erro: 'Usuario  nao cadastrado'});
 
-routes.get('/', (req, res) =>{
-    res.send("Guilherme de Alacoc");
+        return res.status(200).json({error: 'Usuario cadastrado com sucesso!!!'});
+    });
 })
-
 
 routes.get('/contato', (req, res) =>{
     res.send("Sirhan Babylon");
 })
-// module.exports = routes;
 
 export default routes;
